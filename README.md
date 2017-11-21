@@ -1,2 +1,2 @@
 # azure-functions-workshop
-azure functions workshop
+Exploring azure functions, nothing fancy
