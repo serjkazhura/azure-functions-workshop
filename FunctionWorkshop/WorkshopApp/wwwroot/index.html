@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Who's Playing</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="header">
+            <h1>⚽ Who's Playing? ⚽</h1>
+        </div>
+
+
+        <div class="content">
+        <h3 id="loadingMessage">Loading...</h3>
+        <div class="eventDetails">
+
+        <h3>Next game is at <span id="matchTime"></span> on <span id="matchDate"></span> at <span id="matchLocation"></span></h3>
+
+        <div class="myresponse">
+            <h3>My response: </h3>
+            <button data-response="yes">Playing</button>
+            <button data-response="maybe">Maybe</button>
+            <button data-response="no">Not Playing</button>
+            </div>
+
+            <div class="responses">
+                <div class="responseGroup playing">
+                    <h3 class="responseHeader playing">Playing</h3>
+                    <h1 class="responseCount" id="playingCount"></h1>
+                    <div class="players playing"></div>
+                </div>
+                <div class="responseGroup maybe">
+                    <h3 class="responseHeader maybe">Maybe</h3>
+                    <h1 class="responseCount" id="maybeCount"></h1>
+                    <div class="players maybe"></div>
+                </div>
+                <div class="responseGroup notPlaying">
+                    <h3 class="responseHeader notPlaying">Not Playing</h3>
+                    <h1 class="responseCount" id="notPlayingCount"></h1>
+                    <div class="players notPlaying"></div>
+                </div>
+                <div class="responseGroup notResponded">
+                    <h3 class="responseHeader notResponded">Not Responded</h3>
+                    <h1 class="responseCount" id="notRespondedCount"></h1>                
+                    <div class="players notResponded"></div>
+                </div>    
+            </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            &copy; <a href="http://markheath.net/">Mark Heath</a> 2017
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script src="scripts/app.js"></script>
+    </body>
+</html>

@@ -22,11 +22,8 @@ namespace FunctionWorkshop
             personalization.AddTo(new Email(myQueueItem.Email));
             mail.AddPersonalization(personalization);
 
-            var url = "https://78.media.tumblr.com/avatar_6c1e09ab449d_128.png";
-
             var sb = new StringBuilder();
             sb.Append($"Hi {myQueueItem.Name},");
-            sb.Append($"<img src=\"{url}\" alt=\"red panda\" height=\"128\" width=\"128\"></img>");
             sb.Append($"<p>You're invited to join us on {myQueueItem.EventDateAndTime} at {myQueueItem.Location}.</p>");
             sb.Append($"<p>Let us know if you can make it by clicking <a href=\"{myQueueItem.ResponseUrl}\">here</a></p>");
             log.Info(sb.ToString());

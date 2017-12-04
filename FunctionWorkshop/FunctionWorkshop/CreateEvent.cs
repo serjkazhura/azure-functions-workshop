@@ -7,18 +7,8 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 using System;
 using System.Collections.Generic;
-
-//{
-//	"EventDateAndTime" : "2018-01-01 10:30 AM",
-//	"Location" : "Here",
-//	"Invitees" : [
-//		{ "Name" : "Stepa",
-//		  "Email" : "kapusta@gmair.org"	},
-//		{ "Name" : "Vasily",
-//		  "Email" : "vas@gmail.com" }
-//	]
-//}
-
+using Newtonsoft.Json;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace FunctionWorkshop
 {
@@ -44,6 +34,21 @@ namespace FunctionWorkshop
         public string ResponseUrl { get; set; }
     }
 
+    public class EventTableEntity : TableEntity
+    {
+        public DateTime EventDateAndTime { get; set; }
+        public string Location { get; set; }
+        public string ResponseJson { get; set; }
+    }
+
+    public class Response
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string IsPlaying { get; set; }
+        public string ResponseCode { get; set; }
+    }
+
     public static class CreateEvent
     {
         [FunctionName("CreateEvent")]
@@ -52,11 +57,15 @@ namespace FunctionWorkshop
             HttpRequestMessage req,
             [Queue("emails", Connection = "AzureWebJobsStorage")]
             IAsyncCollector<EmailDetails> emailsQueue,
+            [Table("eventsTable", Connection = "AzureWebJobsStorage")]
+            IAsyncCollector<EventTableEntity> eventsTable,
             TraceWriter log)
         {
             log.Info("CreateEvent function  is processing a request.");
 
             var eventDetails = await req.Content.ReadAsAsync<EventDetails>();
+            var responses = new List<Response>();
+            var eventId = Guid.NewGuid().ToString("n");
 
             foreach (var invitee in eventDetails.Invitees)
             {
@@ -68,10 +77,26 @@ namespace FunctionWorkshop
                     Location = eventDetails.Location,
                     Name = invitee.Name,
                     Email = invitee.Email,
-                    ResponseUrl = $"https://sk-workshop.azurewebsites.net/index.html?code={accessCode}"
+                    ResponseUrl = $"https://sk-workshop.azurewebsites.net/index.html?eventId={eventId}&code={accessCode}"
                 };
                 await emailsQueue.AddAsync(emailDetails);
+                responses.Add(new Response()
+                {
+                    Name = invitee.Name,
+                    Email = invitee.Email,
+                    IsPlaying = "unknown",
+                    ResponseCode = accessCode
+                });
             }
+
+            await eventsTable.AddAsync(new EventTableEntity()
+            {
+                PartitionKey = "event",
+                RowKey = eventId,
+                EventDateAndTime = eventDetails.EventDateAndTime,
+                Location = eventDetails.Location,
+                ResponseJson = JsonConvert.SerializeObject(responses)
+            });
 
             log.Info("CreateEvent function processed a request.");
 
