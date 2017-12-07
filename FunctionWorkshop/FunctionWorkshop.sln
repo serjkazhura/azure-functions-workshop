@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionWorkshop", "Functio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkshopApp", "WorkshopApp\WorkshopApp.csproj", "{8E7B2EBA-E3E1-447B-9AB4-ADC617D9E105}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionWorkshopAdmin", "FunctionWorkshopAdmin\FunctionWorkshopAdmin.csproj", "{BE58AE25-CD44-4C2A-AE27-423D09E71931}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8E7B2EBA-E3E1-447B-9AB4-ADC617D9E105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E7B2EBA-E3E1-447B-9AB4-ADC617D9E105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E7B2EBA-E3E1-447B-9AB4-ADC617D9E105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE58AE25-CD44-4C2A-AE27-423D09E71931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE58AE25-CD44-4C2A-AE27-423D09E71931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE58AE25-CD44-4C2A-AE27-423D09E71931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE58AE25-CD44-4C2A-AE27-423D09E71931}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

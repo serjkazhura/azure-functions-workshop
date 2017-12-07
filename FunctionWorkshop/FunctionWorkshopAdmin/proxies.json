@@ -1,0 +1,23 @@
+﻿{
+  "$schema": "http://json.schemastore.org/proxies",
+  "proxies": {
+    "index.html": {
+      "matchCondition": {
+        "route": "/"
+      },
+      "backendUri": "http://sk-workshop.azurewebsites.net/admin/index.html"
+    },
+    "CSS Passthrough": {
+      "matchCondition": {
+        "route": "/css/{*restOfPath}"
+      },
+      "backendUri": "http://sk-workshop.azurewebsites.net/admin/css/{restOfPath}"
+    },
+    "Scripts Passthrough": {
+      "matchCondition": {
+        "route": "/scripts/{*restOfPath}"
+      },
+      "backendUri": "http://sk-workshop.azurewebsites.net/admin/scripts/{restOfPath}"
+    }
+  }
+}
